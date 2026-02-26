@@ -256,9 +256,9 @@
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-coffee-being-poured-into-a-cup-from-a-pot-23912-large.mp4" type="video/mp4">
             </video>
             <div class="video-overlay px-6">
-                <!-- LOGO BOX WITH YOUR GITHUB LOGO -->
+                <!-- LOGO BOX WITH UPDATED LOGO PATH -->
                 <div class="logo-box animate-fade-in-up">
-                    <img src="lindo cafe logo.webp" alt="Lindo Cafe Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="lindo cafe logo.webp" alt="Lindo Cafe Logo" class="logo-img" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=LC&backgroundColor=703612&fontFamily=Serif';">
                     <div class="logo-placeholder" style="display:none;">Lindo Cafe</div>
                 </div>
                 
@@ -473,18 +473,10 @@
         let currentPage = 'home';
         const overlay = document.getElementById('page-transition-overlay');
 
-        /**
-         * Enhanced Page Transition
-         * @param {string} pageId - Target page ID
-         * @param {string} scrollTarget - Optional element ID to scroll to
-         */
         function prettyPageTransition(pageId, scrollTarget = null) {
             if (currentPage === pageId && !scrollTarget) return;
 
-            // Trigger Cinematic Overlay
             overlay.classList.add('active');
-
-            // Slightly dim the current page for effect
             document.body.style.opacity = '0.8';
             document.body.style.transition = 'opacity 0.5s ease';
 
@@ -498,18 +490,16 @@
                     window.scrollTo(0, 0);
                 }
 
-                // Fade back in and lower the curtain
                 document.body.style.opacity = '1';
                 overlay.classList.remove('active');
 
-                // If menu page, stagger the menu item appearance
                 if (pageId === 'menu-page') {
                     document.querySelectorAll('.menu-item').forEach((el, i) => {
                         el.style.animationDelay = `${i * 0.1}s`;
                         el.classList.add('reveal-item');
                     });
                 }
-            }, 800); // Matches CSS transition time
+            }, 800);
         }
 
         function showPage(pageId) {
