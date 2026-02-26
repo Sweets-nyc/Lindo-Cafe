@@ -82,7 +82,7 @@
             padding: 1rem 2rem !important;
         }
 
-        /* Hero & Video - UPDATED: Height reduced to 75vh */
+        /* Hero & Video */
         .video-container {
             position: relative;
             width: 100%;
@@ -115,13 +115,15 @@
             z-index: 20;
         }
 
-        /* HERO SQUARE BOX */
+        /* HERO SQUARE BOX - Updated with background image */
         .hero-image-box {
-            width: 180px; /* Made slightly smaller again for the shorter header */
+            width: 180px; 
             height: 180px; 
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=400');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             animation: boxAppear 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             margin-bottom: 2rem;
             display: flex;
@@ -135,7 +137,7 @@
         .box-inner-ring {
             position: absolute;
             inset: 15px;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
             animation: rotateSlow 20s linear infinite;
         }
 
@@ -253,7 +255,6 @@
 
     <!-- HOME PAGE VIEW -->
     <div id="home" class="page-view page-active">
-        <!-- Reduced Height Video Hero Section -->
         <header class="video-container relative" id="hero-container">
             <video autoplay muted loop playsinline class="video-bg">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-coffee-being-poured-into-a-cup-from-a-pot-23912-large.mp4" type="video/mp4">
@@ -286,7 +287,6 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    <!-- Specials Items -->
                     <div class="group cursor-pointer" onclick="prettyPageTransition('menu-page')">
                         <div class="special-image-box shadow-2xl transition-all duration-700 group-hover:scale-[1.02]">
                             <div class="item-visual">
@@ -388,7 +388,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
-                <!-- Signature Lattes -->
                 <div>
                     <h2 class="text-3xl mb-8 border-b border-[--brown-deep]/10 pb-4 italic">Especialidades</h2>
                     <div class="menu-item">
@@ -421,7 +420,6 @@
                     </div>
                 </div>
 
-                <!-- Classic Menu Items -->
                 <div>
                     <h2 class="text-3xl mb-8 border-b border-[--brown-deep]/10 pb-4 italic">Clásicos y Pan</h2>
                     <div class="menu-item">
