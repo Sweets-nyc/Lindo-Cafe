@@ -38,8 +38,8 @@
         }
 
         @keyframes boxAppear {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from { transform: scale(0.9) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
         @keyframes rotateSlow {
@@ -86,7 +86,7 @@
         .video-container {
             position: relative;
             width: 100%;
-            height: 75vh; 
+            height: 85vh; /* Slightly taller hero for more breathing room */
             overflow: hidden;
             z-index: 10;
         }
@@ -113,45 +113,49 @@
             justify-content: center;
             text-align: center;
             z-index: 20;
+            padding-top: 5vh; /* Shifts everything down slightly */
         }
 
-        /* HERO SQUARE BOX - Updated with background image */
+        /* HERO SQUARE BOX - Lowered and Sized */
         .hero-image-box {
-            width: 180px; 
-            height: 180px; 
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('lindo cafe logo.webp');
-            background-size: cover;
+            width: 280px; 
+            height: 280px; 
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('lindo cafe logo.webp');
+            background-size: contain;
+            background-repeat: no-repeat;
             background-position: center;
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: boxAppear 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            margin-bottom: 2rem;
+            margin-bottom: 3.5rem; /* Increased margin for lower placement */
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+            padding: 20px;
         }
 
         /* Rotating accent ring inside the box */
         .box-inner-ring {
             position: absolute;
-            inset: 15px;
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-            animation: rotateSlow 20s linear infinite;
+            inset: 10px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            animation: rotateSlow 30s linear infinite;
+            pointer-events: none;
         }
 
         /* Corner accents for the box */
         .box-accent {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
         }
-        .accent-tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
-        .accent-tr { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
-        .accent-bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
-        .accent-br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+        .accent-tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+        .accent-tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+        .accent-bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+        .accent-br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
 
         /* Buttons */
         .btn-explore {
@@ -270,9 +274,7 @@
                     <div class="box-accent accent-br"></div>
                 </div>
                 
-                <p class="text-white text-[10px] tracking-[0.6em] uppercase mb-10 opacity-0 font-bold animate-fade-in" style="animation-delay: 0.9s;">Mexico City &bull; Heritage Roasts</p>
-                
-                <button onclick="prettyPageTransition('menu-page')" class="btn-explore uppercase animate-fade-in" style="animation-delay: 1.3s;">Explore Menu</button>
+                <button onclick="prettyPageTransition('menu-page')" class="btn-explore uppercase animate-fade-in" style="animation-delay: 0.9s;">Explore Menu</button>
             </div>
         </header>
 
