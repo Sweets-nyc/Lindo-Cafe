@@ -23,7 +23,7 @@
         }
 
         h1, h2, h3, .brand {
-            font-family: 'DM+Serif+Display', serif;
+            font-family: 'DM Serif Display', serif;
         }
 
         /* Animations */
@@ -37,8 +37,14 @@
             to { opacity: 1; }
         }
 
-        .animate-fade-in-up {
-            animation: fadeInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        @keyframes boxAppear {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .animate-fade-in {
@@ -76,14 +82,13 @@
             padding: 1rem 2rem !important;
         }
 
-        /* Hero & Video */
+        /* Hero & Video - UPDATED: Height reduced to 75vh */
         .video-container {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 75vh; 
             overflow: hidden;
             z-index: 10;
-            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 1.2s ease;
         }
 
         .video-bg {
@@ -110,50 +115,52 @@
             z-index: 20;
         }
 
-        /* Logo Box */
-        .logo-box {
+        /* HERO SQUARE BOX */
+        .hero-image-box {
+            width: 180px; /* Made slightly smaller again for the shorter header */
+            height: 180px; 
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 40px;
-            width: 300px;
-            height: 300px;
+            animation: boxAppear 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            margin-bottom: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 40px;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            opacity: 0;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
         }
 
-        .logo-box::before, .logo-box::after {
-            content: "";
+        /* Rotating accent ring inside the box */
+        .box-inner-ring {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(255,255,255,0.3);
+            inset: 15px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            animation: rotateSlow 20s linear infinite;
         }
-        .logo-box::before { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
-        .logo-box::after { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
 
-        .logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: brightness(0) invert(1); /* Forces logo to white to match the aesthetic */
+        /* Corner accents for the box */
+        .box-accent {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
         }
+        .accent-tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+        .accent-tr { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
+        .accent-bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
+        .accent-br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
 
         /* Buttons */
         .btn-explore {
             background-color: var(--pure-white);
             color: var(--brown-deep);
-            padding: 22px 55px;
+            padding: 16px 44px;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             border-radius: 2px;
             font-weight: 700;
             letter-spacing: 0.3em;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
             opacity: 0;
             cursor: pointer;
@@ -188,7 +195,7 @@
             box-shadow: 0 10px 30px rgba(88,37,4,0.05);
         }
 
-        .image-placeholder {
+        .item-visual {
             width: 100%;
             height: 100%;
             display: flex;
@@ -196,11 +203,7 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(to bottom, #fdfaf5, #f6dfc1);
-            color: var(--brown-deep);
-            opacity: 0.4;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
+            position: relative;
         }
 
         /* Menu Page Specifics */
@@ -236,7 +239,7 @@
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 px-8 py-6 md:px-12 md:py-8 flex justify-between items-center nav-transparent animate-fade-in" id="navbar">
         <a href="javascript:void(0)" onclick="prettyPageTransition('home')" class="brand text-3xl md:text-4xl tracking-tighter italic text-white" id="brand-logo">
-            Lindo <span class="font-light opacity-80">Cafe</span>
+            Lindo <span class="font-light opacity-80 text-2xl">Cafe</span>
         </a>
         <div class="hidden md:flex gap-12 uppercase tracking-[0.3em] text-[10px] font-bold text-white" id="nav-links">
             <a href="javascript:void(0)" onclick="prettyPageTransition('menu-page')" id="menu-toggle-btn" class="hover:opacity-60 transition-opacity">Full Menu</a>
@@ -250,17 +253,25 @@
 
     <!-- HOME PAGE VIEW -->
     <div id="home" class="page-view page-active">
-        <!-- Full Video Hero Section -->
+        <!-- Reduced Height Video Hero Section -->
         <header class="video-container relative" id="hero-container">
             <video autoplay muted loop playsinline class="video-bg">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-coffee-being-poured-into-a-cup-from-a-pot-23912-large.mp4" type="video/mp4">
             </video>
+            
             <div class="video-overlay px-6">
-                <!-- LOGO BOX WITH UPDATED LOGO PATH -->
-        
-                <p class="text-white text-[10px] tracking-[0.6em] uppercase mb-12 opacity-0 font-bold animate-fade-in" style="animation-delay: 0.8s;">Mexico City &bull; Heritage Roasts</p>
+                <!-- HERO SQUARE BOX -->
+                <div class="hero-image-box">
+                    <div class="box-inner-ring"></div>
+                    <div class="box-accent accent-tl"></div>
+                    <div class="box-accent accent-tr"></div>
+                    <div class="box-accent accent-bl"></div>
+                    <div class="box-accent accent-br"></div>
+                </div>
                 
-                <button onclick="prettyPageTransition('menu-page')" class="btn-explore uppercase animate-fade-in" style="animation-delay: 1s;">Explore Menu</button>
+                <p class="text-white text-[10px] tracking-[0.6em] uppercase mb-10 opacity-0 font-bold animate-fade-in" style="animation-delay: 0.9s;">Mexico City &bull; Heritage Roasts</p>
+                
+                <button onclick="prettyPageTransition('menu-page')" class="btn-explore uppercase animate-fade-in" style="animation-delay: 1.3s;">Explore Menu</button>
             </div>
         </header>
 
@@ -275,10 +286,13 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    <!-- Strawberry Matcha -->
+                    <!-- Specials Items -->
                     <div class="group cursor-pointer" onclick="prettyPageTransition('menu-page')">
                         <div class="special-image-box shadow-2xl transition-all duration-700 group-hover:scale-[1.02]">
-                            <div class="image-placeholder italic"><span class="mb-4 text-2xl">🍓</span>Strawberry Matcha</div>
+                            <div class="item-visual">
+                                <span class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-500">🍵</span>
+                                <div class="absolute bottom-4 left-0 w-full text-center text-[8px] tracking-widest font-bold opacity-30">EST. 2024</div>
+                            </div>
                         </div>
                         <div class="flex justify-between items-start px-4">
                             <div>
@@ -289,10 +303,12 @@
                         </div>
                     </div>
 
-                    <!-- Honeybear Latte -->
                     <div class="group cursor-pointer" onclick="prettyPageTransition('menu-page')">
                         <div class="special-image-box shadow-2xl transition-all duration-700 group-hover:scale-[1.02]">
-                            <div class="image-placeholder italic"><span class="mb-4 text-2xl">🍯</span>Honeybear Latte</div>
+                            <div class="item-visual">
+                                <span class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-500">🍯</span>
+                                <div class="absolute bottom-4 left-0 w-full text-center text-[8px] tracking-widest font-bold opacity-30">WILD HONEY</div>
+                            </div>
                         </div>
                         <div class="flex justify-between items-start px-4">
                             <div>
@@ -303,10 +319,12 @@
                         </div>
                     </div>
 
-                    <!-- Mazapan Latte -->
                     <div class="group cursor-pointer" onclick="prettyPageTransition('menu-page')">
                         <div class="special-image-box shadow-2xl transition-all duration-700 group-hover:scale-[1.02]">
-                            <div class="image-placeholder italic"><span class="mb-4 text-2xl">🥜</span>Mazapan Latte</div>
+                            <div class="item-visual">
+                                <span class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-500">🥜</span>
+                                <div class="absolute bottom-4 left-0 w-full text-center text-[8px] tracking-widest font-bold opacity-30">MAZAPAN DE LA ROSA</div>
+                            </div>
                         </div>
                         <div class="flex justify-between items-start px-4">
                             <div>
@@ -317,10 +335,12 @@
                         </div>
                     </div>
 
-                    <!-- Horchata Latte -->
                     <div class="group cursor-pointer" onclick="prettyPageTransition('menu-page')">
                         <div class="special-image-box shadow-2xl transition-all duration-700 group-hover:scale-[1.02]">
-                            <div class="image-placeholder italic"><span class="mb-4 text-2xl">🥛</span>Horchata Latte</div>
+                            <div class="item-visual">
+                                <span class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-500">🥛</span>
+                                <div class="absolute bottom-4 left-0 w-full text-center text-[8px] tracking-widest font-bold opacity-30">RICE & CINNAMON</div>
+                            </div>
                         </div>
                         <div class="flex justify-between items-start px-4">
                             <div>
@@ -368,7 +388,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
-                <!-- Signature Lattes (Specials) -->
+                <!-- Signature Lattes -->
                 <div>
                     <h2 class="text-3xl mb-8 border-b border-[--brown-deep]/10 pb-4 italic">Especialidades</h2>
                     <div class="menu-item">
@@ -426,13 +446,6 @@
                         <span class="font-light">$6.00</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Full-width feature at bottom of menu -->
-            <div class="mt-24 p-12 bg-[#f6dfc1]/30 border border-[--brown-deep]/5 text-center rounded-sm">
-                <h3 class="text-2xl italic mb-4">Brunch Pairing</h3>
-                <p class="text-sm font-light opacity-70 mb-6">Chilaquiles Verdes served with any Signature Special Latte.</p>
-                <span class="text-xl font-light">$18.00</span>
             </div>
         </div>
     </div>
@@ -540,6 +553,5 @@
 
         window.onscroll = handleScroll;
     </script>
-
 </body>
 </html>
